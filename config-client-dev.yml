@@ -1,0 +1,18 @@
+spring:
+   application:
+      name: config-client
+   cloud:
+      config:
+         server:
+            git:
+               uri:
+               searchPaths: 
+               username: 
+               password: 
+            label: master
+   profiles:
+      active: dev
+
+# 关闭命令设置属性
+SpringApplication:
+   setAddCommandLineProperties: false

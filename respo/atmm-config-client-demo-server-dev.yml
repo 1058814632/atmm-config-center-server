@@ -6,16 +6,44 @@ server:
       mime-types: application/json,application/xml,text/html,text/xml,text/plain
       #min-response-size: 
 
-# 实例是否在eureka服务器上注册自己的信息以供其他服务发现，默认为true\
-# 此客户端是否获取eureka服务器注册表上的注册信息，默认为true
-# eureka:
-#    instance:
-#       appname: atmm-config-client-demo-server
-#       hostname: ${spring.cloud.client.ipAddress}
-#       instance-id: ${spring.application.name}-${spring.cloud.client.ipAddress}:${server.port}
-#    client:
-#       serviceUrl:
-#          defaultZone: http://atfmserver:atfmserver@192.168.243.197:8000/eureka/
+# 服务应用名
+# 配置中心地址
+#   快速失败
+#   读取服务配置中心的配置文件名称为：{spring.application.name }-{spring.profiles.active }.yml
+# spring cloud 与 cloud整合配置
+# sprng boot 与 kafka 整合配置
+spring:
+   cloud:
+      config:
+         fail-fast: true
+         discovery:
+            enabled: true
+            serviceId: atmm-config-center-server
+      stream:
+         kafka:
+            binder:
+               brokers: localhost:9092
+               defaultBrokerPort: 9092
+               zkNodes: localhost:2181
+               defaultZkPort: 2181
+
+   kafka:
+      bootstrap-servers: localhost:9093
+      producer: 
+         retries: 0
+         batch-size: 16384
+         buffer-memory: 33554432
+         key-serializer: org.apache.kafka.common.serialization.StringSerializer
+         value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      consumer:
+         group-id: test-consumer-group
+         auto-offset-reset: earliest
+         enable-auto-commit: true
+         auto-commit-interval: 100
+         key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+         value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+
 user:
    name: taotao
    age: 20

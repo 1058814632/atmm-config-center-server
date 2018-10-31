@@ -14,11 +14,6 @@ server:
 # sprng boot 与 kafka 整合配置
 spring:
    cloud:
-      config:
-         fail-fast: true
-         discovery:
-            enabled: true
-            serviceId: atmm-config-center-server
       stream:
          kafka:
             binder:

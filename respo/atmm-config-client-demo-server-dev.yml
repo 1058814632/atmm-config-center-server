@@ -43,6 +43,8 @@ spring:
          key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
          value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
+# 关闭安全验证
+management.security.enabled: false
 
 user:
    name: taotao

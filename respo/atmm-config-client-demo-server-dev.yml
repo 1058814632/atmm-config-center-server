@@ -17,6 +17,6 @@ server:
 #       serviceUrl:
 #          defaultZone: http://atfmserver:atfmserver@192.168.243.197:8000/eureka/
 user:
-   name: huangtaotao
+   name: taotao
    age: 20
    call: 182

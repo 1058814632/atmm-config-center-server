@@ -28,8 +28,8 @@ spring:
          retries: 0
          batch-size: 16384
          buffer-memory: 33554432
-         key-serializer: org.apache.kafka.common.serialization.StringSerializer
-         value-serializer: org.apache.kafka.common.serialization.StringSerializer
+         #key-serializer: org.apache.kafka.common.serialization.StringSerializer
+         #value-serializer: org.apache.kafka.common.serialization.StringSerializer
       consumer:
          group-id: test-consumer-group
          auto-offset-reset: earliest

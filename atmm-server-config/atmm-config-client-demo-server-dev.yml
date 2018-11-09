@@ -1,0 +1,9 @@
+#服务端口
+server:
+   port: 8204
+
+
+user:
+   name: taotao
+   age: 20
+   call: 182

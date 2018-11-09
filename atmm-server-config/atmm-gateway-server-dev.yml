@@ -1,0 +1,65 @@
+#服务端口
+server:
+   port: 8201
+
+# zuul超时配置
+# socket超时时间
+# 连接超时时间
+# zuul性能调优
+#     semaphore.max-semaphores: Zuul默认是使用信号量隔离，并且信号量的大小是100，请求的并发线程超过100就会报错
+#     host.maxTotalConnections: http客户端连接池最大连接，默认200
+#     host.maxPerRouteConnections: 每个route可用的最大连接数，默认值是20
+# zuul路由规则
+# atmm-atmb-server wildfly服务；strip-prefix=false，wildfly服务必须添加此项配置，否则无法路由
+zuul:
+   host:
+       socket-timeout-millis: 6000
+       connect-timeout-millis: 6000
+       maxTotalConnections: 2000
+       maxPerRouteConnections: 1000
+   SendErrorFilter:
+       error:
+           disable:true
+   semaphore:
+       max-semaphores: 5000
+   routes:
+      atmm-server-demo-one:
+          path: /atmm-server-demo-one/**
+          serviceId: atmm-server-demo-one
+          
+      atmm-server-demo-two:
+          path: /atmm-server-demo-two/**
+          serviceId: atmm-server-demo-two
+     
+      flow-alert-atmb-server:
+          path: /flow-alert-atmb-server/**
+          serviceId: flow-alert-atmb-server
+
+      atmm-capacity-server:
+          path: /atmm-capacity-server/**
+          serviceId: atmm-capacity-server    
+       
+# ribbon超时配置
+# ribbonTimeout = (ribbonReadTimeout + ribbonConnectTimeout) * (maxAutoRetries + 1) * (maxAutoRetriesNextServer + 1);
+# ribbonTimeout = (6000 + 6000) * (0 + 1) * (1 + 1) = 24000
+ribbon:
+   ReadTimeout: 6000
+   ConnectTimeout: 6000
+   
+   
+# 熔断器配置
+# hystrixTimeout >= ribbonTimeout
+hystrix: 
+   command:
+       default:
+          execution:
+              timeout:
+                  enabled: true
+              isolation:
+                  thread:
+                     timeoutInMilliseconds: 12000
+                     
+                     
+                     
+
+

@@ -1,0 +1,60 @@
+#该配置文件为公共配置，未经允许不得改动
+
+#压缩配置
+server:
+   compression:
+      enable: true
+      mime-types: application/json,application/xml,text/html,text/xml,text/plain
+      #min-response-size: 
+
+# 配置中心地址
+#   快速失败
+#   读取服务配置中心的配置文件名称为：{spring.application.name }-{spring.profiles.active }.yml
+# spring cloud 与 cloud整合配置
+spring:
+   cloud:
+      stream:
+         kafka:
+            binder:
+               brokers: 192.168.243.15:9092
+               defaultBrokerPort: 9092
+               zkNodes: 192.168.243.15:2181
+               defaultZkPort: 2181
+
+
+# 关闭安全验证
+management.security.enabled: false
+
+# 实例是否在eureka服务器上注册自己的信息以供其他服务发现，默认为true\
+# 此客户端是否获取eureka服务器注册表上的注册信息，默认为true
+# ${spring.cloud.client.ipAddress}
+eureka:
+   instance:
+      appname: ${spring.application.name}
+      hostname: ${spring.cloud.client.ipAddress}
+      instance-id: ${spring.application.name}-${spring.cloud.client.ipAddress}:${server.port}
+
+# URL配置
+# URL key配置说明-必须以url.key开头，且符合 url.key.{module-name}的命名规则
+# url key 命名不能存在大写字母(因为会自动识别驼峰命名规则)，必须使用下划线"_"进行隔开
+url:
+   key:
+      capacity:
+         dynamic_airport: http://atmm-gateway-server/atmm-capacity-server/capacity/dynamic/airport/{airportName}
+         dynamic_area: http://atmm-gateway-server/atmm-capacity-server/capacity/dynamic/area/{areaName}
+         dynamic_point: http://atmm-gateway-server/atmm-capacity-server/capacity/dynamic/point/{firId}/{pointName}
+         dynamic_route_seg: http://atmm-gateway-server/atmm-capacity-server/capacity/dynamic/routeSeg/{routeSegName}
+         dynamic: http://atmm-gateway-server/atmm-capacity-server/capacity/dynamic/routeSeg/{routeSegName}
+      capacity-threshold:
+         dynamic_airport: http://atmm-gateway-server/atmm-capacity-server/capacity/dynamic/threshold/airport/{airportName}
+         dynamic_area: http://atmm-gateway-server/atmm-capacity-server/capacity/dynamic/threshold/area/{areaName}
+         dynamic_point: http://atmm-gateway-server/atmm-capacity-server/capacity/dynamic/threshold/point/{firId}/{pointName}
+         dynamic_route_seg: http://atmm-gateway-server/atmm-capacity-server/capacity/dynamic/threshold/routeSeg/{routeSegName}
+         
+test:
+   key:
+      user:
+         name: taotao
+         age: 22
+         adress: 超容测试下
+        

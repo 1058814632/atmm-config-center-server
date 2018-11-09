@@ -5,8 +5,8 @@ server:
 # discovery 灰度发布功能-版本标记
 eureka:
    instance:
-      metadataMap.version=1.0
-      metadataMap.group=demo-service-group
+      metadataMap.version: 1.0
+      metadataMap.group: demo-service-group
 
 # zuul超时配置
 # socket超时时间
